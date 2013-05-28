@@ -7,6 +7,7 @@ module Locomotion
       @location_manager.delegate        = @delegate
       @location_manager.distanceFilter  = KCLDistanceFilterNone
       @location_manager.desiredAccuracy = KCLLocationAccuracyBest
+      @location_manager.pausesLocationUpdatesAutomatically = false if @location_manager.respond_to?(:pausesLocationUpdatesAutomatically)
       self
     end
     attr_reader :location_manager
