@@ -30,6 +30,10 @@ module Locomotion
      @original.horizontalAccuracy
    end
 
+   def distance_to other
+     @original.distanceFromLocation CLLocation.alloc.initWithLatitude other.latitude, longitude: other.longitude
+   end
+
    def inspect
      "<Location #{latitude} #{longitude} >"
    end
