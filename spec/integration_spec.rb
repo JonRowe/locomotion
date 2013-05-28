@@ -6,7 +6,14 @@ describe 'integration into an app' do
   end
 
   it 'updates the location label' do
-    view('location').should.satisfy { |label| label.text =~ /-?\d+\.\d+,-?\d+\.\d+/ }
+    if CLLocationManager.authorizationStatus == KCLAuthorizationStatusAuthorized
+      wait(1) {}
+      view('location').should.satisfy { |label| label.text =~ /-?\d+\.\d+,-?\d+\.\d+/ }
+    else
+      warn "ENABLE LOCATION SERVICES FOR TEST"
+      wait(5) {}
+      view('location').should.satisfy { |label| label.text =~ /-?\d+\.\d+,-?\d+\.\d+/ }
+    end
   end
 
 end
