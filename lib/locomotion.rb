@@ -11,5 +11,6 @@ Motion::Project::App.setup do |app|
   Dir.glob(root+'/**/*.rb').each do |file|
     app.files.unshift(file)
   end
+  app.frameworks << 'CoreLocation'
 
 end
