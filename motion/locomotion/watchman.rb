@@ -29,6 +29,7 @@ module Locomotion
     end
 
     def clear
+      @listeners = []
       @location_manager.stopUpdatingLocation
     end
 

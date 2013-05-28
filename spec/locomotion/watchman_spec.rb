@@ -51,9 +51,16 @@ describe 'the watchman' do
     @watchman.pause 42
     @watchman.location_manager.commands.should.equal [[:defer,10000,42]]
   end
+
   it 'tells location manager to stop on clear' do
     @watchman.clear
     @watchman.location_manager.commands.should.equal [:stop]
+  end
+
+  it 'removes listeners on clear' do
+    @watchman.listeners << :a
+    @watchman.clear
+    @watchman.listeners.should.equal []
   end
 
   it 'tells listeners on update' do
