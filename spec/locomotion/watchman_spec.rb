@@ -62,4 +62,10 @@ describe 'the watchman' do
     @location.should.satisfy { |l| l.latitude == 1 && l.longitude == 1 }
   end
 
+  { switch_to_accuracy: :desiredAccuracy, switch_to_distance_filter: :distanceFilter }.each do |method,setting|
+    it "can configure #{setting} but resets afterwards" do
+      @watchman.send(method,42)
+      @watchman.location_manager.commands.should.equal [[setting,42],:stop,:start]
+    end
+  end
 end

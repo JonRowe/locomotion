@@ -47,5 +47,15 @@ module Locomotion
     def error code
     end
 
+    def switch_to_accuracy accuracy
+      @location_manager.desiredAccuracy = accuracy
+      reset
+    end
+
+    def switch_to_distance_filter distance
+      @location_manager.distanceFilter = distance
+      reset
+    end
+
   end
 end
