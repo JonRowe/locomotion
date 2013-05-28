@@ -2,8 +2,9 @@ module Locomotion
   class Watchman
 
     def init location_manager = CLLocationManager
+      @delegate         = Locomotion::Delegate.alloc.initWith(self)
       @location_manager = location_manager.alloc.init
-      @location_manager.delegate        = Locomotion::Delegate.alloc.initWith(self)
+      @location_manager.delegate        = @delegate
       @location_manager.distanceFilter  = KCLDistanceFilterNone
       @location_manager.desiredAccuracy = KCLLocationAccuracyBest
       self
