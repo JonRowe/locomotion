@@ -23,7 +23,7 @@ describe 'he who watches the watchman (the delegate)' do
 
   it 'handles didUpdateLocations' do
     @delegate.locationManager nil, didUpdateLocations: [1,2]
-    @watchman.locations.should.equal [2]
+    @watchman.locations.should.equal [1,2]
   end
 
   it 'handles didFailWithError: KCLErrorDenied by notifying the watchman' do
@@ -65,5 +65,10 @@ describe 'he who watches the watchman (the delegate)' do
   it 'handles didChangeAuthorizationStatus other' do
     @delegate.locationManager nil, didChangeAuthorizationStatus: nil
     @watchman.errors.should.equal nil
+  end
+
+  it 'handles failure of deferred updates' do
+    @delegate.locationManager nil, didFinishDeferredUpdatesWithError: 'an_error'
+    @watchman.errors.should.equal [:deferred_fail]
   end
 end

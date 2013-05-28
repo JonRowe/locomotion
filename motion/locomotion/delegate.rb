@@ -12,7 +12,9 @@ module Locomotion
     end
 
     def locationManager manager, didUpdateLocations: locations
-      @watchman.update locations[-1]
+      locations.each do |location|
+        @watchman.update location
+      end
     end
 
     def locationManager manager, didFailWithError: error
@@ -34,6 +36,10 @@ module Locomotion
       when KCLAuthorizationStatusDenied
         @watchman.error :denied
       end
+    end
+
+    def locationManager manager, didFinishDeferredUpdatesWithError: error
+      @watchman.error :deferred_fail
     end
 
   end
