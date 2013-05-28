@@ -58,8 +58,8 @@ describe 'the watchman' do
 
   it 'tells listeners on update' do
     @watchman.listeners << proc { |location| @location = location }
-    @watchman.update [1,1]
-    @location.should.equal [1,1]
+    @watchman.update CLLocation.alloc.initWithLatitude 1, longitude: 1
+    @location.should.satisfy { |l| l.latitude == 1 && l.longitude == 1 }
   end
 
 end

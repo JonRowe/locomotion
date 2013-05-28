@@ -32,7 +32,7 @@ module Locomotion
 
     def update location
       @listeners.each do |listener|
-        listener.call location
+        listener.call Location.alloc.init(location)
       end
     end
 
