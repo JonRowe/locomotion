@@ -1,23 +1,8 @@
 describe 'the watchman' do
 
   before do
-    test_manager = Class.new do
-      attr_accessor :delegate, :distanceFilter, :desiredAccuracy, :purpose
-
-      def startUpdatingLocation
-        commands << :start
-      end
-      def stopUpdatingLocation
-        commands << :stop
-      end
-      def allowDeferredLocationUpdatesUntilTraveled distance, timeout: time
-        commands << [:defer,distance,time]
-      end
-      def commands
-        @commands ||= []
-      end
-    end
-    @watchman = Locomotion::Watchman.alloc.init test_manager
+    @watchman = Locomotion::Watchman.alloc.init FakeLocationManager
+    @watchman.location_manager.reset
   end
 
   it 'initialises the location manager with the minimum distance filter' do
