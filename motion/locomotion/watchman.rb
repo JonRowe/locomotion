@@ -28,6 +28,11 @@ module Locomotion
       @location_manager.allowDeferredLocationUpdatesUntilTraveled 10000, timeout: time
     end
 
+    def reset
+      @location_manager.stopUpdatingLocation
+      @location_manager.startUpdatingLocation
+    end
+
     def clear
       @listeners = []
       @location_manager.stopUpdatingLocation

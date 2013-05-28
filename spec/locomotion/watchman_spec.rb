@@ -23,9 +23,11 @@ describe 'the watchman' do
   it 'initialises the location manager with the minimum distance filter' do
     @watchman.location_manager.distanceFilter.should.equal KCLDistanceFilterNone
   end
+
   it 'initialises the location manager with the best accuracy' do
     @watchman.location_manager.desiredAccuracy.should.equal KCLLocationAccuracyBest
   end
+
   it 'sets the delegate to be a locomotion delegate' do
     @watchman.location_manager.should.satisfy do |lm|
       lm.delegate.class == Locomotion::Delegate and
@@ -47,9 +49,15 @@ describe 'the watchman' do
     @watchman.go
     @watchman.location_manager.commands.should.equal [:start]
   end
+
   it 'tells location manager to defer on pause' do
     @watchman.pause 42
     @watchman.location_manager.commands.should.equal [[:defer,10000,42]]
+  end
+
+  it 'tells location manager to stop then start on reset' do
+    @watchman.reset
+    @watchman.location_manager.commands.should.equal [:stop,:start]
   end
 
   it 'tells location manager to stop on clear' do
