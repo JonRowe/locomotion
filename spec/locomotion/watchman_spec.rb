@@ -25,9 +25,9 @@ describe 'the watchman' do
     @watchman.location_manager.purpose.should.equal 'My Purpose'
   end
 
-  it 'accepts listeners' do
-    @watchman.listeners << :a
-    @watchman.listeners.should.equal [:a]
+  it 'accepts a listener' do
+    @watchman.listener = :a
+    @watchman.listener.should.equal :a
   end
 
   it 'tells location manager to start on go' do
@@ -50,14 +50,8 @@ describe 'the watchman' do
     @watchman.location_manager.commands.should.equal [:stop]
   end
 
-  it 'removes listeners on clear' do
-    @watchman.listeners << :a
-    @watchman.clear
-    @watchman.listeners.should.equal []
-  end
-
   it 'tells listeners on update' do
-    @watchman.listeners << proc { |location| @location = location }
+    @watchman.listener = proc { |location| @location = location }
     @watchman.update CLLocation.alloc.initWithLatitude 1, longitude: 1
     @location.should.satisfy { |l| l.latitude == 1 && l.longitude == 1 }
   end

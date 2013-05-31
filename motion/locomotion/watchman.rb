@@ -11,13 +11,10 @@ module Locomotion
       self
     end
     attr_reader :location_manager
+    attr_accessor :listener
 
     def process options = {}
       @location_manager.purpose = options[:purpose] if options[:purpose]
-    end
-
-    def listeners
-      @listeners ||= []
     end
 
     def go
@@ -35,13 +32,10 @@ module Locomotion
 
     def clear
       @location_manager.stopUpdatingLocation
-      @listeners = []
     end
 
     def update location
-      @listeners.each do |listener|
-        listener.call Location.alloc.init(location)
-      end
+      @listener.call Location.alloc.init(location)
     end
 
     def error code

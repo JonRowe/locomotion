@@ -18,7 +18,7 @@ module Locomotion
 
     def watch opts = {}, &block
       watchman.process opts
-      watchman.listeners << block
+      watchman.listener = block
       watchman.go
     end
 
