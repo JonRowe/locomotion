@@ -1,4 +1,5 @@
 # Locomotion
+[![Code Climate](https://codeclimate.com/github/JonRowe/locomotion.png)](https://codeclimate.com/github/JonRowe/locomotion)
 
 TODO: Write a gem description
 
