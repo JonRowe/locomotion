@@ -1,7 +1,12 @@
 # Locomotion
 [![Code Climate](https://codeclimate.com/github/JonRowe/locomotion.png)](https://codeclimate.com/github/JonRowe/locomotion)
 
-TODO: Write a gem description
+Locomotion is a location aware library for iOS applications written in
+RubyMotion. It exists to tirelessly update your application with a users
+location.
+
+**Note** unlike BubbleWrap, Locomotion does not consider loosing GPS signal
+to be an error, and will keep retrying forever until you tell it to stop.
 
 ## Installation
 
